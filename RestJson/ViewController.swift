@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var local: UILabel!
     @IBOutlet weak var estado: UILabel!
     
+    @IBOutlet weak var cep: UITextField!
+    @IBOutlet weak var ender: UITextField!
     var session: URLSession?
     
     @IBAction func exibir(_ sender: Any) {
@@ -68,6 +70,42 @@ class ViewController: UIViewController {
         return resposta
     }
     
+    @IBAction func buscaCEP(_ sender: Any) {
+        let config = URLSessionConfiguration.default
+        
+        session = URLSession(configuration: config)
+        let url = URL(string: "https://www.viacep.com.br/ws/09972020/json/")
+        print(url!)
+        let task = session?.dataTask(with: url!, completionHandler: { (data, response, error) in
+            // ações que serão efetuadas qunado
+            // a execução da task se completa
+            let texto = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            print(texto!)
+            
+            if let ende = self.retornaEnderecoCEP(data: data!){
+                DispatchQueue.main.async {
+                    self.ender.text = ende
+                }
+            }
+        })
+        // a ln abaixo dispara a execução da task
+        task?.resume()
+    }
+    
+    func retornaEnderecoCEP(data: Data) -> String? {
+        var resposta:String?=nil
+        do{
+            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
+            if let ender = json["logradouro"] as? String{
+                resposta = ender
+            }
+        }catch let error as NSError{
+            return "Falha as carregar: \(error.localizedDescription)"
+        }
+        
+        return resposta
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
