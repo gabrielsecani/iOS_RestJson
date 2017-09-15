@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  RestJson
 //
-//  Created by Usuário Convidado on 24/08/17.
-//  Copyright © 2017 Gabriel Ribeiro. All rights reserved.
+//  Created by Usuário Convidado on 14/09/17.
+//  Copyright © 2017 Usuário Convidado. All rights reserved.
 //
 
 import UIKit
