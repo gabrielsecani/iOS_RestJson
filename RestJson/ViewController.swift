@@ -41,10 +41,10 @@ class ViewController: UIViewController {
             // a execução da task se completa
             
             
-            let ende = self.retornaCampo(data: data!, campo: "logradouro")!
-            let estado = self.retornaCampo(data: data!, campo: "localidade")!
+            let ende = self.retornaCampo(data: data!, campo: "logradouro")
+            let estado = self.retornaCampo(data: data!, campo: "localidade")
             let bairro = self.retornaCampo(data: data!, campo: "bairro")
-            let city = self.retornaCampo(data: data!, campo: "uf")!
+            let city = self.retornaCampo(data: data!, campo: "uf")
             
             DispatchQueue.main.async {
                 self.bairro.text = bairro
@@ -69,9 +69,29 @@ class ViewController: UIViewController {
         }catch let error as NSError{
             return "Falha as carregar: \(error.localizedDescription)"
         }
-        
         return resposta
     }
+    
+    func retornaArray(data: Data) -> [String] {
+        var respostaArray:[String] = []
+        do{
+            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
+            
+            if let logradouro = json["logradouro"] as? String{
+                if let localidade = json["localidade"] as? String{
+                    if let bairro = json["bairro"] as? String{
+                        if let uf = json["uf"] as? String{
+                            respostaArray = [logradouro, localidade, bairro, uf]
+                        }
+                    }
+                }
+            }
+        }catch let error as NSError{
+            print("Falha as carregar: \(error.description)")
+        }
+        return respostaArray
+    }
 
+    
 }
 
