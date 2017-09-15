@@ -42,7 +42,6 @@ class ViewController: UIViewController {
             
             
             // retorna campo com funcao com 2 parametros
-            
 //            let ende = self.retornaCampo(data: data!, campo: "logradouro")
 //            let estado = self.retornaCampo(data: data!, campo: "localidade")
 //            let bairro = self.retornaCampo(data: data!, campo: "bairro")
@@ -57,6 +56,7 @@ class ViewController: UIViewController {
             
             // retorna array
             let arr = self.retornaArray(data!)
+
             DispatchQueue.main.async {
                 self.bairro.text = arr[0]
                 self.ender.text = arr[1]
@@ -70,6 +70,7 @@ class ViewController: UIViewController {
 
     }
     
+    //retorna campo com 2 parametros
     func retornaCampo(data: Data, campo: String) -> String? {
         var resposta:String?=nil
         do{
@@ -83,6 +84,7 @@ class ViewController: UIViewController {
         return resposta
     }
     
+    // retorna array com valores
     func retornaArray(data: Data) -> [String] {
         var respostaArray:[String] = []
         do{
@@ -92,7 +94,7 @@ class ViewController: UIViewController {
                 if let localidade = json["localidade"] as? String{
                     if let bairro = json["bairro"] as? String{
                         if let uf = json["uf"] as? String{
-                            respostaArray = [logradouro, localidade, bairro, uf]
+                            respostaArray = [bairro, logradouro, localidade, , uf]
                         }
                     }
                 }
