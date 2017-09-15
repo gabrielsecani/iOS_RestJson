@@ -41,16 +41,27 @@ class ViewController: UIViewController {
             // a execução da task se completa
             
             
-            let ende = self.retornaCampo(data: data!, campo: "logradouro")
-            let estado = self.retornaCampo(data: data!, campo: "localidade")
-            let bairro = self.retornaCampo(data: data!, campo: "bairro")
-            let city = self.retornaCampo(data: data!, campo: "uf")
+            // retorna campo com funcao com 2 parametros
             
+//            let ende = self.retornaCampo(data: data!, campo: "logradouro")
+//            let estado = self.retornaCampo(data: data!, campo: "localidade")
+//            let bairro = self.retornaCampo(data: data!, campo: "bairro")
+//            let city = self.retornaCampo(data: data!, campo: "uf")
+//            
+//            DispatchQueue.main.async {
+//                self.bairro.text = bairro
+//                self.ender.text = ende
+//                self.cidade.text = city
+//                self.uf.text = estado
+//            }
+            
+            // retorna array
+            let arr = self.retornaArray(data!)
             DispatchQueue.main.async {
-                self.bairro.text = bairro
-                self.ender.text = ende
-                self.cidade.text = city
-                self.uf.text = estado
+                self.bairro.text = arr[0]
+                self.ender.text = arr[1]
+                self.cidade.text = arr[2]
+                self.uf.text = arr[3]
             }
             
         })
